@@ -512,18 +512,6 @@ public class Main {
 
     public static void main(String[] args) {
         service.initDataForDemo();
-
-        studentsService.addStudent("Student 1", new Date("20/09/2000"), 1, "A");
-        studentsService.addStudent("Student 2", new Date("20/09/2000"), 1, "B");
-        studentsService.addStudent("Student 3", new Date("20/09/2000"), 1, "C");
-        
-        studentsService.addStudent("Student 4", new Date("20/09/2000"), 2, "A");
-        studentsService.addStudent("Student 5", new Date("20/09/2000"), 2, "B");
-        studentsService.addStudent("Student 6", new Date("20/09/2000"), 2, "C");
-        
-        studentsService.addStudent("Student 7", new Date("20/09/2000"), 3, "B");
-        studentsService.addStudent("Student 8", new Date("20/09/2000"), 3, "C");
-        studentsService.addStudent("Student 9", new Date("20/09/2000"), 3, "A");
         
         System.out.println("Buna ziua!");
         System.out.println("Bine ati venit in catalogul virtual al facultatii noastre!");
