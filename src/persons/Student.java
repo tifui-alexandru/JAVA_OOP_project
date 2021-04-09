@@ -5,6 +5,8 @@ import subject.Subject;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static service.Service.year1;
 import static service.Service.year2;
@@ -30,6 +32,24 @@ public class Student extends Person {
 
     public void setGrade(Subject subj, float grade) {
         grades.put(subj, grade);
+    }
+
+    public float computeAvg() {
+        AtomicInteger no = new AtomicInteger();
+        AtomicReference<Float> sum = new AtomicReference<>((float) 0);
+
+        grades.forEach((key, value) -> {
+            no.incrementAndGet();
+            sum.updateAndGet(v -> (float) (v + value));
+        });
+
+        return sum.get() / no.get();
+    }
+
+    public boolean evaluationComplete() {
+        if (grades.size() == subjects.size())
+            return true;
+        return false;
     }
 
     public int getYearOfStudy() {

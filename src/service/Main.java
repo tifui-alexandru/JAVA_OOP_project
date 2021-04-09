@@ -456,22 +456,6 @@ public class Main {
 
         Subject subj = subjectsService.getSubject(name);
         studentsService.markExam(subj);
-
-//        int evalForm;
-//        while (true) {
-//            System.out.println(String.format("Introduceti forma de evaluare cu numarul %d", idx));
-//            System.out.println("Tastati 1 pentru examen, 2 pentru restanta, 3 pentru marire, 4 pentru proiect");
-//            String response = sc.nextLine();
-//            if (service.validResponse(response, 1, 4)) {
-//                evalForm = Integer.parseInt(response);
-//                if (subjectsService.getSubject(name).hasEvalForm(evalForm))
-//                    break;
-//            }
-//            System.out.println("Optinue invalida, incercati din nou!");
-//        }
-//
-//        int percentage = subjectsService.markExam(name, evalForm));
-//            studentsService.giveGrades(name, )
     }
 
     public static void showRankingsMenu() {
@@ -487,7 +471,7 @@ public class Main {
                 System.out.println("Optinue invalida, incercati din nou!");
         }
 
-        service.showRankings(yearOfStudy);
+        studentsService.showRankings(yearOfStudy);
     }
 
     public static boolean performActionMenu(int res) {

@@ -4,6 +4,7 @@ import persons.Student;
 import subject.Subject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -71,6 +72,28 @@ public class StudentsService {
 
                 stud.setGrade(subj, total);
             }
+        }
+    }
+
+    public void showRankings(int yearOfStudy) {
+        if (studentsList.get(0).evaluationComplete())
+            System.out.println("Evaluarea studentilor a fost completa\n");
+        else
+            System.out.println("Evaluarea studentilor este incompleta. Unele examene nu au fost sustinute/corectate\n");
+
+        Collections.sort(studentsList, new AvgComparator());
+
+        for (var stud : studentsList) {
+            System.out.println("\nNume");
+            System.out.println(stud.getName());
+
+            System.out.println("\nGrupa");
+            System.out.println(stud.getGroupName());
+
+            System.out.println("\nMedia:");
+            System.out.println(stud.computeAvg());
+
+            System.out.println("\n\n");
         }
     }
 }
