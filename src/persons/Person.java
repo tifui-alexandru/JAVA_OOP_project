@@ -35,8 +35,4 @@ public class Person {
         for (var subj : subjects)
             System.out.println(subj);
     }
-
-    void addSubject(String subjectName) {
-        subjects.add(subjectName);
-    }
 }

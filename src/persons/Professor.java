@@ -1,12 +1,15 @@
 package persons;
 
 import java.util.Date;
+import java.util.List;
 
 public class Professor extends Person {
     private String title;
 
-    Professor(String name, Date birthday) {
+    public Professor(String name, Date birthday, List<String> subjects, String title) {
         super(name, birthday);
+        this.subjects = subjects;
+        this.title = title;
     }
 
     @Override

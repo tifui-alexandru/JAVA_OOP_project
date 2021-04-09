@@ -1,6 +1,11 @@
 package service;
 
+import evaluationForms.Evaluation;
+import evaluationForms.Exam;
+import evaluationForms.Project;
 import year.Year;
+
+import java.util.Date;
 
 public class Service {
     public static Year year1;
@@ -26,5 +31,20 @@ public class Service {
         else if (yearOfStudy == 3)
             return year3.hasGroup(groupName);
         return false;
+    }
+
+    Evaluation constructEvaluation(int evalForm, Date examDate, int percentage, boolean onComputer) {
+        if (evalForm == 1) {
+            return new Exam(examDate, percentage, false, false);
+        }
+        else if (evalForm == 2) {
+            return new Exam(examDate, percentage, true, false);
+        }
+        else if (evalForm == 3) {
+            return new Exam(examDate, percentage, false, true);
+        }
+        else {
+            return new Project(examDate, percentage, onComputer);
+        }
     }
 }

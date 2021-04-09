@@ -1,12 +1,15 @@
 package persons;
 
 import java.util.Date;
+import java.util.List;
 
 public class Assistant extends Person{
     private boolean isMasterStudent;
 
-    Assistant(String name, Date birthday) {
+    public Assistant(String name, Date birthday, List<String> subjects, boolean isMasterStudent) {
         super(name, birthday);
+        this.subjects = subjects;
+        this.isMasterStudent = isMasterStudent;
     }
 
     @Override

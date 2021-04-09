@@ -15,7 +15,7 @@ public class Student extends Person {
     private int yearOfStudy;
     private String groupName;
 
-    Student(String name, Date birthday, int yearOfStudy, String groupName) {
+    public Student(String name, Date birthday, int yearOfStudy, String groupName) {
         super(name, birthday);
         this.yearOfStudy = yearOfStudy;
         this.groupName = groupName;

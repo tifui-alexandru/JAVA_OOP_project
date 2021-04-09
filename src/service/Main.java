@@ -260,7 +260,7 @@ public class Main {
             while (true) {
                 System.out.println(String.format("Materia numarul %d", idx));
                 String subjectName = sc.nextLine();
-                if (service.findSubject(subjectName)) {
+                if (subjectsService.findSubject(subjectName)) {
                     subjects.add(subjectName);
                     break;
                 }
@@ -269,7 +269,7 @@ public class Main {
             }
         }
 
-        service.addProf(name, bDay, subjects, title);
+        professorsService.addProf(name, bDay, subjects, title);
     }
 
     public static void addAssistentMenu() {
@@ -321,7 +321,7 @@ public class Main {
             while (true) {
                 System.out.println(String.format("Materia numarul %d", idx));
                 String subjectName = sc.nextLine();
-                if (service.findSubject(subjectName)) {
+                if (subjectsService.findSubject(subjectName)) {
                     subjects.add(subjectName);
                     break;
                 }
@@ -330,14 +330,25 @@ public class Main {
             }
         }
 
-        service.addAssistent(name, bDay, subjects, masterStudent);
+        asistentsService.addAssistent(name, bDay, subjects, masterStudent);
     }
 
     public static void addSubjectMenu() {
         System.out.println("\nVa rog introduceti urmatoarele date despre materie:\n");
 
-        System.out.println("Numele materiei");
-        String name = sc.nextLine();
+        String name;
+        while (true) {
+            System.out.println("Numele materiei");
+            String response = sc.nextLine();
+
+            if (subjectsService.findSubject(response)) {
+                System.out.println("Materia exista deja! Va rugam reincercati!");
+            }
+            else {
+                name = response;
+                break;
+            }
+        }
 
         int yearOfStudy;
         while (true) {
@@ -406,10 +417,25 @@ public class Main {
                     System.out.println("Optinue invalida, incercati din nou!");
             }
 
-            evalForms.add(service.constructEvaluation(evalForm, examDate, percentage));
+            boolean onComputer;
+            System.out.println("Daca forma de evaluare este proiect selectati 1 daca aceasta consta in");
+            System.out.println("realizarea unui proiect si 0 in caz contrat");
+            System.out.println("Daca proba nu este realizarea unui proiect apasati orice tasta");
+            String response = sc.nextLine();
+            if (service.validResponse(response, 0, 1)) {
+                if (Integer.parseInt(response) == 0)
+                    onComputer = false;
+                else
+                    onComputer = true;
+            }
+            else
+                onComputer = false;
+
+
+            evalForms.add(service.constructEvaluation(evalForm, examDate, percentage, onComputer));
         }
 
-        service.addSubject(name, yearOfStudy, evalForms);
+        subjectsService.addSubject(name, yearOfStudy, evalForms);
     }
 
     public static void markExamMenu() {

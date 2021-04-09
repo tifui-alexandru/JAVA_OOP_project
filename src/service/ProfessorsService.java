@@ -3,6 +3,7 @@ package service;
 import persons.Professor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProfessorsService {
@@ -30,5 +31,9 @@ public class ProfessorsService {
 
         if (flag)
             System.out.println("Nu exista niciun profesor cu acest nume");
+    }
+
+    public void addProf(String name, Date bDay, List<String> subjects, String title) {
+        professorsList.add(new Professor(name, bDay, subjects, title));
     }
 }

@@ -3,6 +3,7 @@ package service;
 import persons.Assistant;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AsistantsService {
@@ -30,5 +31,9 @@ public class AsistantsService {
 
         if (flag)
             System.out.println("Nu exista niciun asistent cu acest nume");
+    }
+
+    public void addAssistent(String name, Date bDay, List<String> subjects, boolean masterStudent) {
+        assistantsList.add(new Assistant(name, bDay, subjects, masterStudent));
     }
 }

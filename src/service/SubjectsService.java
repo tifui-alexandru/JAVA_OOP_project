@@ -1,5 +1,6 @@
 package service;
 
+import evaluationForms.Evaluation;
 import subject.Subject;
 
 import java.util.ArrayList;
@@ -47,5 +48,17 @@ public class SubjectsService {
 
         if (flag)
             System.out.println("Nu exista niciun stuent cu acest nume");
+    }
+
+    public boolean findSubject(String name) {
+        for (var subj : subjectsList) {
+            if (subj.getName() == name)
+                return true;
+        }
+        return false;
+    }
+
+    public void addSubject(String name, int yearOfStudy, List<Evaluation> evalForms) {
+        subjectsList.add(new Subject(name, yearOfStudy, evalForms));
     }
 }

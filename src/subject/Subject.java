@@ -7,8 +7,14 @@ import java.util.List;
 
 public class Subject {
     private String name;
-    private List<Evaluation> evaluationList = new ArrayList<>();
     private int yearOfStudy;
+    private List<Evaluation> evaluationList = new ArrayList<>();
+
+    public Subject(String name, int yearOfStudy, List<Evaluation> evalForms) {
+        this.name = name;
+        this.yearOfStudy = yearOfStudy;
+        this.evaluationList = evalForms;
+    }
 
     public int getYearOfStudy() {
         return yearOfStudy;

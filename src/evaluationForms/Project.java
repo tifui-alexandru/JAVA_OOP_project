@@ -1,11 +1,16 @@
 package evaluationForms;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Project extends Evaluation {
-    private int maxTeamSize;
     private boolean onComputer;
+
+    public Project(Date date, int percentage, boolean onComputer) {
+        super(date, percentage);
+        this.onComputer = onComputer;
+    }
 
     @Override
     public void displayDetails() {

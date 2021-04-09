@@ -9,9 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Evaluation {
-    private double percentage;
+    private int percentage;
     private Date date;
     private boolean marked;
+
+    public Evaluation(Date date, int percentage) {
+        this.date = date;
+        this.percentage = percentage;
+        this.marked = false;
+    }
 
     public void displayDetails() {
         System.out.println("Data evaluare:");
