@@ -1,6 +1,8 @@
 package subject;
 
 import evaluationForms.Evaluation;
+import evaluationForms.Exam;
+import evaluationForms.Project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,10 @@ public class Subject {
 
     public String getName() {
         return name;
+    }
+
+    public List<Evaluation> getEvaluationList() {
+        return evaluationList;
     }
 
     public void displayDetails() {

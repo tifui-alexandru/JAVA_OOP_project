@@ -28,6 +28,10 @@ public class Student extends Person {
             this.subjects = year3.getSubjects();
     }
 
+    public void setGrade(Subject subj, float grade) {
+        grades.put(subj, grade);
+    }
+
     public int getYearOfStudy() {
         return yearOfStudy;
     }

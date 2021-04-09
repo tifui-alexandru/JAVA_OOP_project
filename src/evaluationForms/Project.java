@@ -12,6 +12,10 @@ public class Project extends Evaluation {
         this.onComputer = onComputer;
     }
 
+    public String getName() {
+        return "proiect";
+    }
+
     @Override
     public void displayDetails() {
         System.out.println("Proiect");

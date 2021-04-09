@@ -1,6 +1,7 @@
 package service;
 
 import evaluationForms.Evaluation;
+import subject.Subject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -439,23 +440,38 @@ public class Main {
     }
 
     public static void markExamMenu() {
-        System.out.println("Introduceti numele materiei");
-        String name = sc.nextLine();
-
-        int evalForm;
+        String name;
         while (true) {
-            System.out.println(String.format("Introduceti forma de evaluare cu numarul %d", idx));
-            System.out.println("Tastati 1 pentru examen, 2 pentru restanta, 3 pentru marire, 4 pentru proiect");
+            System.out.println("Introduceti numele materiei");
             String response = sc.nextLine();
-            if (service.validResponse(response, 1, 4)) {
-                evalForm = Integer.parseInt(response);
+
+            if (!subjectsService.findSubject(response)) {
+                System.out.println("Materia nu exista! Va rugam reincercati!");
+            }
+            else {
+                name = response;
                 break;
             }
-            else
-                System.out.println("Optinue invalida, incercati din nou!");
         }
 
-        service.markExam(name, evalForm);
+        Subject subj = subjectsService.getSubject(name);
+        studentsService.markExam(subj);
+
+//        int evalForm;
+//        while (true) {
+//            System.out.println(String.format("Introduceti forma de evaluare cu numarul %d", idx));
+//            System.out.println("Tastati 1 pentru examen, 2 pentru restanta, 3 pentru marire, 4 pentru proiect");
+//            String response = sc.nextLine();
+//            if (service.validResponse(response, 1, 4)) {
+//                evalForm = Integer.parseInt(response);
+//                if (subjectsService.getSubject(name).hasEvalForm(evalForm))
+//                    break;
+//            }
+//            System.out.println("Optinue invalida, incercati din nou!");
+//        }
+//
+//        int percentage = subjectsService.markExam(name, evalForm));
+//            studentsService.giveGrades(name, )
     }
 
     public static void showRankingsMenu() {

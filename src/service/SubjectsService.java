@@ -58,6 +58,14 @@ public class SubjectsService {
         return false;
     }
 
+    public Subject getSubject(String name) {
+        for (var subj : subjectsList) {
+            if (subj.getName() == name)
+                return subj;
+        }
+        return null;
+    }
+
     public void addSubject(String name, int yearOfStudy, List<Evaluation> evalForms) {
         subjectsList.add(new Subject(name, yearOfStudy, evalForms));
     }

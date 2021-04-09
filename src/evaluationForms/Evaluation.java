@@ -19,6 +19,22 @@ public class Evaluation {
         this.marked = false;
     }
 
+    public String getName() {
+        return "evaluare";
+    }
+
+    public int getPercentage() {
+        return percentage;
+    }
+
+    public boolean isMarked() {
+        return marked;
+    }
+
+    public void mark() {
+        marked = true;
+    }
+
     public void displayDetails() {
         System.out.println("Data evaluare:");
         System.out.println(date);

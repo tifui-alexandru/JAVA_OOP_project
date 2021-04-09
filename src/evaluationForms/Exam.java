@@ -12,6 +12,22 @@ public class  Exam extends Evaluation {
         this.isRestanta = isRestanta;
     }
 
+    public String getName() {
+        if(isRestanta)
+            return "restanta";
+        if (isMarire)
+            return "marire";
+        return "examen";
+    }
+
+    public boolean isMarire() {
+        return isMarire;
+    }
+
+    public boolean isRestanta() {
+        return isRestanta;
+    }
+
     @Override
     public void displayDetails() {
         System.out.println("Examen");

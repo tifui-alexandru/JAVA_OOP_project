@@ -1,6 +1,7 @@
 package service;
 
 import persons.Student;
+import subject.Subject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,5 +53,24 @@ public class StudentsService {
 
     public void addStudent(String name, Date bDay, int yearOfStudy, String groupName) {
         studentsList.add(new Student(name, bDay, yearOfStudy, groupName));
+    }
+
+    public void markExam(Subject subj) {
+        for (var stud : studentsList) {
+            if (stud.getYearOfStudy() == subj.getYearOfStudy()) {
+                float total = 0;
+
+                for (var eval : subj.getEvaluationList()) {
+                    System.out.print("Introduceti nota pentru ");
+                    System.out.println(eval.getName());
+
+                    int grade = Integer.parseInt(Main.sc.nextLine());
+
+                    total += 1.0 * grade * eval.getPercentage();
+                }
+
+                stud.setGrade(subj, total);
+            }
+        }
     }
 }
