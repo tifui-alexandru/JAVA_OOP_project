@@ -1,22 +1,11 @@
 package service;
 
-import evaluationForms.Evaluation;
-import persons.Assistant;
-import persons.Professor;
-import persons.Student;
-import subject.Subject;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
+import year.Year;
 
 public class Service {
-    public static List<Student> studentsList = new ArrayList<>();
-    public static List<Professor> professorsList = new ArrayList<>();
-    public static List<Assistant> assistantsList = new ArrayList<>();
-    public static List<Subject> subjectsList = new ArrayList<>();
-    public static List<Evaluation> evaluationsList = new ArrayList<>();
-
-    public static List<Set<String>> groupNamesSet = new ArrayList<>();
+    public static Year year1;
+    public static Year year2;
+    public static Year year3;
 
     boolean validResponse(String response, int lowerBound, int upperBound) {
         try {
@@ -29,39 +18,13 @@ public class Service {
         }
     }
 
-    public static void studentsInfo() {
-
-    }
-
-    public static void profsInfo() {
-
-    }
-
-    public static void subjectsInfo() {
-
-    }
-
-    public static void addStudent() {
-
-    }
-
-    public static void addProf() {
-
-    }
-
-    public static void addAssistent() {
-
-    }
-
-    public static void addSubject() {
-
-    }
-
-    public static void markExam() {
-
-    }
-
-    public static void showRankings() {
-
+    boolean hasGroupName(int yearOfStudy, String groupName) {
+        if (yearOfStudy == 1)
+            return year1.hasGroup(groupName);
+        else if (yearOfStudy == 2)
+            return year2.hasGroup(groupName);
+        else if (yearOfStudy == 3)
+            return year3.hasGroup(groupName);
+        return false;
     }
 }

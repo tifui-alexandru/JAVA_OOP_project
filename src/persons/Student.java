@@ -6,13 +6,26 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static service.Service.year1;
+import static service.Service.year2;
+import static service.Service.year3;
+
 public class Student extends Person {
     private Map<Subject, Float> grades = new HashMap<>();
     private int yearOfStudy;
     private String groupName;
 
-    Student(String name, Date birthday) {
+    Student(String name, Date birthday, int yearOfStudy, String groupName) {
         super(name, birthday);
+        this.yearOfStudy = yearOfStudy;
+        this.groupName = groupName;
+
+        if (yearOfStudy == 1)
+            this.subjects = year1.getSubjects();
+        else if (yearOfStudy == 2)
+            this.subjects = year2.getSubjects();
+        else
+            this.subjects = year3.getSubjects();
     }
 
     public int getYearOfStudy() {

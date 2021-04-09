@@ -208,7 +208,7 @@ public class Main {
         while (true) {
             System.out.println("Grupa in care acesta se afla");
             String response = sc.nextLine();
-            if (service.groupNamesSet.get(yearOfStudy).contains(response)) {
+            if (service.hasGroupName(yearOfStudy, response)) {
                 groupName = response;
                 break;
             }
@@ -217,7 +217,7 @@ public class Main {
             }
         }
 
-        service.addStudent(name, bDay, yearOfStudy, groupName);
+        studentsService.addStudent(name, bDay, yearOfStudy, groupName);
     }
 
     public static void addProfMenu() {

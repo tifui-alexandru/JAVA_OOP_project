@@ -3,6 +3,7 @@ package service;
 import persons.Student;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class StudentsService {
@@ -47,5 +48,9 @@ public class StudentsService {
 
         if (flag)
             System.out.println("Nu exista niciun stuent cu acest nume");
+    }
+
+    public void addStudent(String name, Date bDay, int yearOfStudy, String groupName) {
+        studentsList.add(new Student(name, bDay, yearOfStudy, groupName));
     }
 }
