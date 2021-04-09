@@ -11,6 +11,9 @@ import java.util.Scanner;
 public class Main {
     public static Scanner sc = new Scanner(System.in);
     static Service service = new Service();
+    static StudentsService studentsService = new StudentsService();
+    static ProfessorsService professorsService = new ProfessorsService();
+    static AsistantsService asistentsService = new AsistantsService();
 
     public static int displayMenu() {
         while (true) {
@@ -49,28 +52,28 @@ public class Main {
                 int option = Integer.parseInt(response);
                 if (option == 0) {
                     System.out.println(String.format("\nIn facultatea noastra studiaza in total %d studenti la " +
-                                                        "licenta\n", service.getStudentsNo(0)));
-                    service.displayStudentsInfo(0);
+                                                        "licenta\n", studentsService.getStudentsNo(0)));
+                    studentsService.displayStudentsInfo(0);
                 }
                 else if (option == 1) {
                     System.out.println(String.format("\nIn facultatea noastra studiaza in total %d studenti la " +
-                            "licenta in anul 1\n", service.getStudentsNo(1)));
-                    service.displayStudentsInfo(1);
+                            "licenta in anul 1\n", studentsService.getStudentsNo(1)));
+                    studentsService.displayStudentsInfo(1);
                 }
                 else if (option == 2) {
                     System.out.println(String.format("\nIn facultatea noastra studiaza in total %d studenti la " +
-                            "licenta in anul 2\n", service.getStudentsNo(2)));
-                    service.displayStudentsInfo(2);
+                            "licenta in anul 2\n", studentsService.getStudentsNo(2)));
+                    studentsService.displayStudentsInfo(2);
                 }
                 else if (option == 3) {
                     System.out.println(String.format("\nIn facultatea noastra studiaza in total %d studenti la " +
-                            "licenta in anul 3\n", service.getStudentsNo(3)));
-                    service.displayStudentsInfo(3);
+                            "licenta in anul 3\n", studentsService.getStudentsNo(3)));
+                    studentsService.displayStudentsInfo(3);
                 }
                 else {
                     System.out.println("Introduceti va rog numele si prenumele studentului in aceasta ordine");
                     String name = sc.nextLine();
-                    service.displayStudentInfo(name);
+                    studentsService.displayStudentInfo(name);
                 }
                 
                 break;
@@ -95,23 +98,23 @@ public class Main {
                 int option = Integer.parseInt(response);
                 if (option == 0) {
                     System.out.println(String.format("\nIn facultatea noastra activeaza in total %d profesori\n",
-                            service.getProfsNo()));
-                    service.displayProfsInfo();
+                            professorsService.getProfsNo()));
+                    professorsService.displayProfsInfo();
                 }
                 else if (option == 1) {
                     System.out.println(String.format("\nIn facultatea noastra activeaza in total %d asistenti\n",
-                            service.getAsistantsNo()));
-                    service.displayAsistantsInfo();
+                            asistentsService.getAsistantsNo()));
+                    asistentsService.displayAsistantsInfo();
                 }
                 else if (option == 2) {
                     System.out.println("Introduceti va rog numele si prenumele profesorului in aceasta ordine");
                     String name = sc.nextLine();
-                    service.displayProfInfo(name);
+                    professorsService.displayProfInfo(name);
                 }
                 else {
                     System.out.println("Introduceti va rog numele si prenumele asistentului in aceasta ordine");
                     String name = sc.nextLine();
-                    service.displayAsistantInfo(name);
+                    asistentsService.displayAsistantInfo(name);
                 }
 
                 break;
