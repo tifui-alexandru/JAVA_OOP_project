@@ -24,6 +24,10 @@ public class Person {
         return name;
     }
 
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
+    }
+
     public void displayDetails() {
         System.out.println("\nNume:");
         System.out.println(name);

@@ -16,4 +16,9 @@ public class Year {
     public boolean hasGroup(String groupName) {
         return groupNamesSet.contains(groupName);
     }
+
+    // for init only
+    public void addGroup(String name) {
+        groupNamesSet.add(name);
+    }
 }

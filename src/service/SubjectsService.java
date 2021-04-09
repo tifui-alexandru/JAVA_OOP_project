@@ -40,7 +40,7 @@ public class SubjectsService {
         boolean flag = true;
 
         for (var subj : subjectsList) {
-            if (subj.getName() == name) {
+            if (subj.getName().equals(name)) {
                 subj.displayDetails();
                 flag = false;
             }
@@ -52,7 +52,7 @@ public class SubjectsService {
 
     public boolean findSubject(String name) {
         for (var subj : subjectsList) {
-            if (subj.getName() == name)
+            if (subj.getName().equals(name))
                 return true;
         }
         return false;
@@ -60,7 +60,7 @@ public class SubjectsService {
 
     public Subject getSubject(String name) {
         for (var subj : subjectsList) {
-            if (subj.getName() == name)
+            if (subj.getName().equals(name))
                 return subj;
         }
         return null;
@@ -68,5 +68,6 @@ public class SubjectsService {
 
     public void addSubject(String name, int yearOfStudy, List<Evaluation> evalForms) {
         subjectsList.add(new Subject(name, yearOfStudy, evalForms));
+        System.out.println("\nMaterie adaugata cu succes\n");
     }
 }

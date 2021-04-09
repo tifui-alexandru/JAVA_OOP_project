@@ -23,7 +23,7 @@ public class ProfessorsService {
         boolean flag = true;
 
         for (var prof : professorsList) {
-            if (prof.getName() == name) {
+            if (prof.getName().equals(name)) {
                 prof.displayDetails();
                 flag = false;
             }
@@ -35,5 +35,6 @@ public class ProfessorsService {
 
     public void addProf(String name, Date bDay, List<String> subjects, String title) {
         professorsList.add(new Professor(name, bDay, subjects, title));
+        System.out.println("\nProfesor adaugat cu succes\n");
     }
 }

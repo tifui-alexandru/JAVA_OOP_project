@@ -35,5 +35,6 @@ public class AsistantsService {
 
     public void addAssistent(String name, Date bDay, List<String> subjects, boolean masterStudent) {
         assistantsList.add(new Assistant(name, bDay, subjects, masterStudent));
+        System.out.println("\nAsistent adaugat cu succes\n");
     }
 }

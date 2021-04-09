@@ -259,7 +259,7 @@ public class Main {
         System.out.println("Numele materiilor pe care acesta le preda");
         for (int idx = 0; idx < noSubjects; ++idx) {
             while (true) {
-                System.out.println(String.format("Materia numarul %d", idx));
+                System.out.println(String.format("Materia numarul %d", idx + 1));
                 String subjectName = sc.nextLine();
                 if (subjectsService.findSubject(subjectName)) {
                     subjects.add(subjectName);
@@ -320,7 +320,7 @@ public class Main {
         System.out.println("Numele materiilor pe care acesta le preda");
         for (int idx = 0; idx < noSubjects; ++idx) {
             while (true) {
-                System.out.println(String.format("Materia numarul %d", idx));
+                System.out.println(String.format("Materia numarul %d", idx + 1));
                 String subjectName = sc.nextLine();
                 if (subjectsService.findSubject(subjectName)) {
                     subjects.add(subjectName);
@@ -382,7 +382,7 @@ public class Main {
         for (int idx = 0; idx < noEvalForms; ++idx) {
             int evalForm;
             while (true) {
-                System.out.println(String.format("Introduceti forma de evaluare cu numarul %d", idx));
+                System.out.println(String.format("Introduceti forma de evaluare cu numarul %d", idx + 1));
                 System.out.println("Tastati 1 pentru examen, 2 pentru restanta, 3 pentru marire, 4 pentru proiect");
                 String response = sc.nextLine();
                 if (service.validResponse(response, 1, 4)) {
@@ -437,6 +437,7 @@ public class Main {
         }
 
         subjectsService.addSubject(name, yearOfStudy, evalForms);
+        studentsService.updateSubjects(yearOfStudy);
     }
 
     public static void markExamMenu() {
@@ -510,6 +511,20 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        service.initDataForDemo();
+
+        studentsService.addStudent("Student 1", new Date("20/09/2000"), 1, "A");
+        studentsService.addStudent("Student 2", new Date("20/09/2000"), 1, "B");
+        studentsService.addStudent("Student 3", new Date("20/09/2000"), 1, "C");
+        
+        studentsService.addStudent("Student 4", new Date("20/09/2000"), 2, "A");
+        studentsService.addStudent("Student 5", new Date("20/09/2000"), 2, "B");
+        studentsService.addStudent("Student 6", new Date("20/09/2000"), 2, "C");
+        
+        studentsService.addStudent("Student 7", new Date("20/09/2000"), 3, "B");
+        studentsService.addStudent("Student 8", new Date("20/09/2000"), 3, "C");
+        studentsService.addStudent("Student 9", new Date("20/09/2000"), 3, "A");
+        
         System.out.println("Buna ziua!");
         System.out.println("Bine ati venit in catalogul virtual al facultatii noastre!");
 

@@ -8,9 +8,9 @@ import year.Year;
 import java.util.Date;
 
 public class Service {
-    public static Year year1;
-    public static Year year2;
-    public static Year year3;
+    public static Year year1 = new Year();
+    public static Year year2 = new Year();
+    public static Year year3 = new Year();
 
     boolean validResponse(String response, int lowerBound, int upperBound) {
         try {
@@ -46,5 +46,19 @@ public class Service {
         else {
             return new Project(examDate, percentage, onComputer);
         }
+    }
+
+    void initDataForDemo() {
+        year1.addGroup("A");
+        year1.addGroup("B");
+        year1.addGroup("B");
+
+        year2.addGroup("A");
+        year2.addGroup("B");
+        year2.addGroup("C");
+
+        year3.addGroup("A");
+        year3.addGroup("B");
+        year3.addGroup("C");
     }
 }

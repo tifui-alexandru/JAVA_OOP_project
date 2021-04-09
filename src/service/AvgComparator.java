@@ -9,8 +9,8 @@ public class AvgComparator implements Comparator<Student> {
         if (stud1.computeAvg() == stud2.computeAvg())
             return 0;
         if (stud1.computeAvg() > stud2.computeAvg())
-            return 1;
-        else
             return -1;
+        else
+            return 1;
     }
 }

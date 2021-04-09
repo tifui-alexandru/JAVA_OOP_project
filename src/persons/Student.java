@@ -4,6 +4,7 @@ import subject.Subject;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -35,15 +36,15 @@ public class Student extends Person {
     }
 
     public float computeAvg() {
-        AtomicInteger no = new AtomicInteger();
-        AtomicReference<Float> sum = new AtomicReference<>((float) 0);
+        int no = 0;
+        float sum = 0;
 
-        grades.forEach((key, value) -> {
-            no.incrementAndGet();
-            sum.updateAndGet(v -> (float) (v + value));
-        });
+        for (var it : grades.entrySet()) {
+            ++no;
+            sum += it.getValue();
+        }
 
-        return sum.get() / no.get();
+        return sum/ no;
     }
 
     public boolean evaluationComplete() {
