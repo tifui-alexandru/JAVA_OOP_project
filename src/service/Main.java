@@ -14,6 +14,7 @@ public class Main {
     static StudentsService studentsService = new StudentsService();
     static ProfessorsService professorsService = new ProfessorsService();
     static AsistantsService asistentsService = new AsistantsService();
+    static SubjectsService subjectsService = new SubjectsService();
 
     public static int displayMenu() {
         while (true) {
@@ -140,28 +141,28 @@ public class Main {
                 int option = Integer.parseInt(response);
                 if (option == 0) {
                     System.out.println(String.format("\nIn facultatea noastra se studiaza in total %d materii\n",
-                            service.getSubjectssNo(0)));
-                    service.displaySubjectsInfo(0);
+                            subjectsService.getSubjectsNo(0)));
+                    subjectsService.displaySubjectsInfo(0);
                 }
                 else if (option == 1) {
                     System.out.println(String.format("\nIn facultatea noastra se studiaza in total %d materii in anul 1\n",
-                            service.getSubjectssNo(1)));
-                    service.displaySubjectsInfo(1);
+                            subjectsService.getSubjectsNo(1)));
+                    subjectsService.displaySubjectsInfo(1);
                 }
                 else if (option == 2) {
                     System.out.println(String.format("\nIn facultatea noastra se studiaza in total %d materii in anul 2\n",
-                            service.getSubjectssNo(2)));
-                    service.displaySubjectsInfo(2);
+                            subjectsService.getSubjectsNo(2)));
+                    subjectsService.displaySubjectsInfo(2);
                 }
                 else if (option == 3) {
                     System.out.println(String.format("\nIn facultatea noastra se studiaza in total %d materii in anul 3\n",
-                            service.getSubjectssNo(3)));
-                    service.displaySubjectsInfo(3);
+                            subjectsService.getSubjectsNo(3)));
+                    subjectsService.displaySubjectsInfo(3);
                 }
                 else {
                     System.out.println("Introduceti va rog numele materiei");
                     String name = sc.nextLine();
-                    service.displaySubjectInfo(name);
+                    subjectsService.displaySubjectInfo(name);
                 }
 
                 break;

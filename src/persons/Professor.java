@@ -12,7 +12,7 @@ public class Professor extends Person {
     @Override
     public void displayDetails() {
         System.out.println("Titlul profesorului");
-        System.out.println(this.title);
+        System.out.println(title);
 
         super.displayDetails();
     }

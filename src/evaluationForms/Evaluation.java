@@ -13,7 +13,16 @@ public class Evaluation {
     private Date date;
     private boolean marked;
 
-    public double getPercentage() {
-        return percentage;
+    public void displayDetails() {
+        System.out.println("Data evaluare:");
+        System.out.println(date);
+
+        System.out.println("Procentajul din nota finala:");
+        System.out.println(percentage);
+
+        if (this.marked)
+            System.out.println("Proba este deja corectata");
+        else
+            System.out.println("Proba nu este inca corectata");
     }
 }

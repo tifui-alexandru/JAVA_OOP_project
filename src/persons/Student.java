@@ -30,15 +30,15 @@ public class Student extends Person {
     @Override
     public void displayDetails() {
         System.out.println("\nAnul de studiu:");
-        System.out.println(this.yearOfStudy);
+        System.out.println(yearOfStudy);
 
         System.out.println("\nGrupa:");
-        System.out.println(this.groupName);
+        System.out.println(groupName);
 
         super.displayDetails();
 
         System.out.println("\nNotele la materiile sale:");
-        this.grades.forEach((key, value) -> {
+        grades.forEach((key, value) -> {
             System.out.print(key + " ");
             if (value == 0)
                 System.out.println("N/A");

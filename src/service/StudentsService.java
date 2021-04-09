@@ -30,7 +30,7 @@ public class StudentsService {
             }
         }
 
-        for (var stud : studentsList) {
+        for (var stud : displayableStudents) {
             stud.displayDetails();
         }
     }

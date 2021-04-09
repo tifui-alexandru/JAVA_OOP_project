@@ -11,7 +11,7 @@ public class Assistant extends Person{
 
     @Override
     public void displayDetails() {
-        if (this.isMasterStudent)
+        if (isMasterStudent)
             System.out.println("Asistentul este student la master");
         else
             System.out.println("Asistentul nu este student la master");
