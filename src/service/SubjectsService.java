@@ -90,6 +90,15 @@ public class SubjectsService {
         return retVal;
     }
 
+    public static Subject findById(UUID id) {
+        for (var subj : subjectsList) {
+            if (subj.getId() == id) {
+                return subj;
+            }
+        }
+        return null; // not ok
+    }
+
     public void initSubjects(CsvReader reader) throws FileNotFoundException {
         var dbSubjectsList = reader.readData("csv/subjects.csv");
         for (var subj : dbSubjectsList) {

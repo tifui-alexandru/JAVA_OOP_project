@@ -11,7 +11,7 @@ public class Person {
     private String name;
     private Date birthday;
     protected List<String> subjects = new ArrayList<>();
-    UUID id;
+    private UUID id;
 
     Person(String name, Date birthday) {
         this.name = name;
@@ -36,6 +36,8 @@ public class Person {
     public void setSubjects(List<String> subjects) {
         this.subjects = subjects;
     }
+
+    public UUID getId() { return id; }
 
     public void displayDetails() {
         System.out.println("\nNume:");

@@ -3,8 +3,6 @@ package persons;
 import subject.Subject;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static service.Service.year1;
 import static service.Service.year2;

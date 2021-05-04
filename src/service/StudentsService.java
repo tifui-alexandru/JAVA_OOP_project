@@ -135,6 +135,14 @@ public class StudentsService {
         }
     }
 
+    public static Student findById(UUID id) {
+        for (var stud : studentsList) {
+            if (stud.getId() == id)
+                return stud;
+        }
+        return null; // not ok
+    }
+
     public void initStudents(CsvReader reader) throws FileNotFoundException, ParseException {
         var dbStudentsList = reader.readData("csv/students.csv");
         for (var stud : dbStudentsList) {

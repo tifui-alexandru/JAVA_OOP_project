@@ -20,6 +20,7 @@ public class Main {
     static AsistantsService asistentsService = new AsistantsService();
     static SubjectsService subjectsService = new SubjectsService();
     static EvaluationsService evaluationsService = new EvaluationsService();
+    static CatalogService catalogService = new CatalogService();
 
     public static int displayMenu() {
         while (true) {
@@ -522,6 +523,7 @@ public class Main {
         professorsService.initProfessors(reader);
         asistentsService.initAsistants(reader);
         studentsService.initStudents(reader);
+        catalogService.initGrades(reader);
     }
 
     public static void main(String[] args) {
