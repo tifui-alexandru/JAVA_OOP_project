@@ -3,9 +3,10 @@ package service;
 import csvParsers.CsvReader;
 import persons.Professor;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ProfessorsService {
     public static List<Professor> professorsList = new ArrayList<>();
@@ -39,7 +40,18 @@ public class ProfessorsService {
         System.out.println("\nProfesor adaugat cu succes\n");
     }
 
-    public void initProfessors(CsvReader reader) {
+    public void initProfessors(CsvReader reader) throws FileNotFoundException, ParseException {
+        var dbProfessordList = reader.readData("csv/professors.csv");
+        for (var prof : dbProfessordList) {
+            UUID id = UUID.fromString(prof.get(0));
+            String name = prof.get(1);
+            Date bDay = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(prof.get(2));
+            String title = prof.get(3);
 
+            var subjectIds = Service.getTaughtSubjectsIDS(id, "csv/teaching-profs.csv", reader);
+            var subjects = SubjectsService.getSubjectsById(subjectIds);
+
+            professorsList.add(new Professor(name, bDay, subjects, title));
+        }
     }
 }

@@ -6,7 +6,11 @@ import evaluationForms.Exam;
 import evaluationForms.Project;
 import year.Year;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 public class Service {
     public static Year year1 = new Year();
@@ -47,5 +51,15 @@ public class Service {
         else {
             return new Project(examDate, percentage, onComputer);
         }
+    }
+
+    public static List<UUID> getTaughtSubjectsIDS(UUID profId, String path, CsvReader reader) throws FileNotFoundException {
+        var dbSubjects = reader.readData(path);
+        List<UUID> retVal = new ArrayList<>();
+        for (var subj : dbSubjects) {
+            if (UUID.fromString(subj.get(1)) == profId)
+                retVal.add(UUID.fromString(subj.get(0)));
+        }
+        return retVal;
     }
 }

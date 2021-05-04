@@ -10,7 +10,7 @@ public class Subject {
     private int yearOfStudy;
     private List<Evaluation> evaluationList;
     private boolean marked;
-    UUID id;
+    private UUID id;
 
     public Subject(String name, int yearOfStudy, List<Evaluation> evalForms) {
         this.name = name;
@@ -43,6 +43,8 @@ public class Subject {
     public String getName() {
         return name;
     }
+
+    public UUID getId() { return id; }
 
     public List<Evaluation> getEvaluationList() {
         return evaluationList;

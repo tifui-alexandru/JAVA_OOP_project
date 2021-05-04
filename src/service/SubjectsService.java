@@ -75,6 +75,21 @@ public class SubjectsService {
         System.out.println("\nMaterie adaugata cu succes\n");
     }
 
+    public static List<String> getSubjectsById(List<UUID> subjIds) {
+        List<String> retVal = new ArrayList<>();
+
+        for (var givenId : subjIds) {
+            for (var subj : subjectsList) {
+                if (subj.getId() == givenId) {
+                    retVal.add(subj.getName());
+                    break;
+                }
+            }
+        }
+
+        return retVal;
+    }
+
     public void initSubjects(CsvReader reader) throws FileNotFoundException {
         var dbSubjectsList = reader.readData("csv/subjects.csv");
         for (var subj : dbSubjectsList) {

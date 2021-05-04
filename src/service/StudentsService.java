@@ -4,10 +4,10 @@ import csvParsers.CsvReader;
 import persons.Student;
 import subject.Subject;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static service.Service.*;
 
@@ -77,19 +77,33 @@ public class StudentsService {
     }
 
     public void markExam(Subject subj) {
-
         for (var stud : studentsList) {
             if (stud.getYearOfStudy() == subj.getYearOfStudy()) {
                 float total = 0;
+
+                float totalProiect = 0;
+                float totalExamen = 0;
+
+                float perExamen = 0;
+                float perProiect = 0;
 
                 for (var eval : subj.getEvaluationList()) {
                     System.out.println("Introduceti nota pentru " + eval.getName() + " pentru studentul " + stud.getName());
 
                     int grade = Integer.parseInt(Main.sc.nextLine());
 
-                    total += 1.0 * grade * eval.getPercentage() / 100.0;
+                    if (eval.getName().equals("Proiect")) {
+                        totalProiect = grade;
+                        perProiect = eval.getPercentage();
+                    }
+                    else if (grade > totalExamen){
+                        // altfel luam cea mai mare nota dintre (examen, marire, restanta)
+                        totalExamen = grade;
+                        perExamen = eval.getPercentage();
+                    }
                 }
 
+                total = totalExamen * perExamen + totalProiect * perProiect;
                 stud.setGrade(subj, total);
             }
         }
@@ -121,7 +135,16 @@ public class StudentsService {
         }
     }
 
-    public void initStudents(CsvReader reader) {
+    public void initStudents(CsvReader reader) throws FileNotFoundException, ParseException {
+        var dbStudentsList = reader.readData("csv/students.csv");
+        for (var stud : dbStudentsList) {
+            UUID id = UUID.fromString(stud.get(0));
+            String name = stud.get(1);
+            Date bDay = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(stud.get(2));
+            int yearOfStudy = Integer.parseInt(stud.get(3));
+            String groupName = stud.get(4);
 
+            studentsList.add(new Student(name, bDay, yearOfStudy, groupName));
+        }
     }
 }
