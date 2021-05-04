@@ -1,6 +1,7 @@
 package service;
 
 import csvParsers.CsvReader;
+import csvParsers.CsvWriter;
 import evaluationForms.Evaluation;
 import subject.Subject;
 
@@ -13,6 +14,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    public static CsvReader reader = CsvReader.getInstance();
+    public static CsvWriter writer = CsvWriter.getInstance();
+
     public static Scanner sc = new Scanner(System.in);
     static Service service = new Service();
     static StudentsService studentsService = new StudentsService();
@@ -516,8 +520,6 @@ public class Main {
     }
 
     public static void initData() throws FileNotFoundException, ParseException {
-        CsvReader reader = CsvReader.getInstance();
-
         evaluationsService.initEvaluations(reader);
         subjectsService.initSubjects(reader);
         professorsService.initProfessors(reader);
