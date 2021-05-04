@@ -6,18 +6,21 @@ import evaluationForms.Project;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Subject {
     private String name;
     private int yearOfStudy;
     private List<Evaluation> evaluationList = new ArrayList<>();
     private boolean marked;
+    UUID id;
 
     public Subject(String name, int yearOfStudy, List<Evaluation> evalForms) {
         this.name = name;
         this.yearOfStudy = yearOfStudy;
         this.evaluationList = evalForms;
         this.marked = false;
+        id = UUID.randomUUID();
     }
 
     public boolean isMarked() {

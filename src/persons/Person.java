@@ -5,15 +5,18 @@ import subject.Subject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Person {
     private String name;
     private Date birthday;
     protected List<String> subjects = new ArrayList<>();
+    UUID id;
 
     Person(String name, Date birthday) {
         this.name = name;
         this.birthday = birthday;
+        id = UUID.randomUUID();
     }
 
     public Date getBirthday() {

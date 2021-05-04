@@ -2,19 +2,17 @@ package evaluationForms;
 
 import persons.Person;
 
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Evaluation {
     private int percentage;
     private Date date;
+    UUID id;
 
     public Evaluation(Date date, int percentage) {
         this.date = date;
         this.percentage = percentage;
+        id = UUID.randomUUID();
     }
 
     public String getName() {
