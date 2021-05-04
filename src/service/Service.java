@@ -1,5 +1,6 @@
 package service;
 
+import csvParsers.CsvReader;
 import evaluationForms.Evaluation;
 import evaluationForms.Exam;
 import evaluationForms.Project;
@@ -46,19 +47,5 @@ public class Service {
         else {
             return new Project(examDate, percentage, onComputer);
         }
-    }
-
-    void initDataForDemo() {
-        year1.addGroup("A");
-        year1.addGroup("B");
-        year1.addGroup("B");
-
-        year2.addGroup("A");
-        year2.addGroup("B");
-        year2.addGroup("C");
-
-        year3.addGroup("A");
-        year3.addGroup("B");
-        year3.addGroup("C");
     }
 }

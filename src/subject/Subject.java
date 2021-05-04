@@ -1,17 +1,14 @@
 package subject;
 
 import evaluationForms.Evaluation;
-import evaluationForms.Exam;
-import evaluationForms.Project;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class Subject {
     private String name;
     private int yearOfStudy;
-    private List<Evaluation> evaluationList = new ArrayList<>();
+    private List<Evaluation> evaluationList;
     private boolean marked;
     UUID id;
 
@@ -20,7 +17,15 @@ public class Subject {
         this.yearOfStudy = yearOfStudy;
         this.evaluationList = evalForms;
         this.marked = false;
-        id = UUID.randomUUID();
+        this.id = UUID.randomUUID();
+    }
+
+    public Subject(String name, int yearOfStudy, List<Evaluation> evalForms, UUID id) {
+        this.name = name;
+        this.yearOfStudy = yearOfStudy;
+        this.evaluationList = evalForms;
+        this.marked = false;
+        this.id = id;
     }
 
     public boolean isMarked() {

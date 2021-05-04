@@ -12,7 +12,13 @@ public class Evaluation {
     public Evaluation(Date date, int percentage) {
         this.date = date;
         this.percentage = percentage;
-        id = UUID.randomUUID();
+        this.id = UUID.randomUUID();
+    }
+
+    public Evaluation(Date date, int percentage, UUID id) {
+        this.date = date;
+        this.percentage = percentage;
+        this.id = id;
     }
 
     public String getName() {

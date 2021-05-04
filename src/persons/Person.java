@@ -16,7 +16,13 @@ public class Person {
     Person(String name, Date birthday) {
         this.name = name;
         this.birthday = birthday;
-        id = UUID.randomUUID();
+        this.id = UUID.randomUUID();
+    }
+
+    Person(String name, Date birthday, UUID id) {
+        this.name = name;
+        this.birthday = birthday;
+        this.id = id;
     }
 
     public Date getBirthday() {

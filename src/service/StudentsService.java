@@ -1,5 +1,6 @@
 package service;
 
+import csvParsers.CsvReader;
 import persons.Student;
 import subject.Subject;
 
@@ -118,5 +119,9 @@ public class StudentsService {
 
             System.out.println("\n\n");
         }
+    }
+
+    public void initStudents(CsvReader reader) {
+
     }
 }

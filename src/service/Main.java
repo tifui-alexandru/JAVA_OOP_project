@@ -1,8 +1,11 @@
 package service;
 
+import csvParsers.CsvReader;
 import evaluationForms.Evaluation;
 import subject.Subject;
 
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +19,7 @@ public class Main {
     static ProfessorsService professorsService = new ProfessorsService();
     static AsistantsService asistentsService = new AsistantsService();
     static SubjectsService subjectsService = new SubjectsService();
+    static EvaluationsService evaluationsService = new EvaluationsService();
 
     public static int displayMenu() {
         while (true) {
@@ -510,9 +514,25 @@ public class Main {
         return false;
     }
 
+    public static void initData() throws FileNotFoundException, ParseException {
+        CsvReader reader = CsvReader.getInstance();
+
+        evaluationsService.initEvaluations(reader);
+        subjectsService.initSubjects(reader);
+        professorsService.initProfessors(reader);
+        asistentsService.initAsistants(reader);
+        studentsService.initStudents(reader);
+    }
+
     public static void main(String[] args) {
-        service.initDataForDemo();
-        
+        try {
+            initData();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Nu s-au putut incarca datele pentru catalog");
+            return;
+        }
+
         System.out.println("Buna ziua!");
         System.out.println("Bine ati venit in catalogul virtual al facultatii noastre!");
 

@@ -1,5 +1,6 @@
 package service;
 
+import csvParsers.CsvReader;
 import persons.Professor;
 
 import java.util.ArrayList;
@@ -36,5 +37,9 @@ public class ProfessorsService {
     public void addProf(String name, Date bDay, List<String> subjects, String title) {
         professorsList.add(new Professor(name, bDay, subjects, title));
         System.out.println("\nProfesor adaugat cu succes\n");
+    }
+
+    public void initProfessors(CsvReader reader) {
+
     }
 }

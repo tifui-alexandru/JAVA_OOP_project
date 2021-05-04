@@ -1,6 +1,7 @@
 package evaluationForms;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class  Exam extends Evaluation {
     private boolean isRestanta;
@@ -8,6 +9,12 @@ public class  Exam extends Evaluation {
 
     public Exam(Date date, int percentage, boolean isRestanta, boolean isMarire) {
         super(date, percentage);
+        this.isMarire = isMarire;
+        this.isRestanta = isRestanta;
+    }
+
+    public Exam(Date date, int percentage, boolean isRestanta, boolean isMarire, UUID id) {
+        super(date, percentage, id);
         this.isMarire = isMarire;
         this.isRestanta = isRestanta;
     }

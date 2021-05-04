@@ -2,10 +2,7 @@ package persons;
 
 import subject.Subject;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -20,6 +17,19 @@ public class Student extends Person {
 
     public Student(String name, Date birthday, int yearOfStudy, String groupName) {
         super(name, birthday);
+        this.yearOfStudy = yearOfStudy;
+        this.groupName = groupName;
+
+        if (yearOfStudy == 1)
+            this.subjects = year1.getSubjects();
+        else if (yearOfStudy == 2)
+            this.subjects = year2.getSubjects();
+        else
+            this.subjects = year3.getSubjects();
+    }
+
+    public Student(String name, Date birthday, int yearOfStudy, String groupName, UUID id) {
+        super(name, birthday, id);
         this.yearOfStudy = yearOfStudy;
         this.groupName = groupName;
 

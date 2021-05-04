@@ -1,10 +1,14 @@
 package service;
 
+import csvParsers.CsvReader;
 import evaluationForms.Evaluation;
+import evaluationForms.Exam;
 import subject.Subject;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class SubjectsService {
     public static List<Subject> subjectsList = new ArrayList<>();
@@ -69,5 +73,17 @@ public class SubjectsService {
     public void addSubject(String name, int yearOfStudy, List<Evaluation> evalForms) {
         subjectsList.add(new Subject(name, yearOfStudy, evalForms));
         System.out.println("\nMaterie adaugata cu succes\n");
+    }
+
+    public void initSubjects(CsvReader reader) throws FileNotFoundException {
+        var dbSubjectsList = reader.readData("csv/subjects.csv");
+        for (var subj : dbSubjectsList) {
+            UUID id = UUID.fromString(subj.get(0));
+            String name = subj.get(1);
+            int yearOfStudy = Integer.parseInt(subj.get(2));
+            List <Evaluation> evalForms = EvaluationsService.getEvalForms(id);
+
+            subjectsList.add(new Subject(name, yearOfStudy, evalForms, id));
+        }
     }
 }

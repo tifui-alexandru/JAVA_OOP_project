@@ -1,5 +1,6 @@
 package service;
 
+import csvParsers.CsvReader;
 import persons.Assistant;
 
 import java.util.ArrayList;
@@ -36,5 +37,9 @@ public class AsistantsService {
     public void addAssistent(String name, Date bDay, List<String> subjects, boolean masterStudent) {
         assistantsList.add(new Assistant(name, bDay, subjects, masterStudent));
         System.out.println("\nAsistent adaugat cu succes\n");
+    }
+
+    public void initAsistants(CsvReader reader) {
+
     }
 }
