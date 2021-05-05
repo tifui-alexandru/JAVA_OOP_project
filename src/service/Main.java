@@ -346,7 +346,7 @@ public class Main {
         asistentsService.addAssistent(name, bDay, subjects, masterStudent);
     }
 
-    public static void addSubjectMenu() {
+    public static void addSubjectMenu() throws IOException {
         System.out.println("\nVa rog introduceti urmatoarele date despre materie:\n");
 
         String name;
@@ -452,7 +452,7 @@ public class Main {
         studentsService.updateSubjects(yearOfStudy);
     }
 
-    public static void markExamMenu() {
+    public static void markExamMenu() throws IOException {
         String name;
         while (true) {
             System.out.println("Introduceti numele materiei");
@@ -560,7 +560,7 @@ public class Main {
                 stop = performActionMenu(res);
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println("Eroare in gasirea fisierului logger");
+                System.out.println("Eroare in gasirea fisierelor csv");
             }
             if (stop)
                 break;

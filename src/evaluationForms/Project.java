@@ -22,6 +22,7 @@ public class Project extends Evaluation {
         return "proiect";
     }
 
+    @Override
     public boolean isOnComputer() { return onComputer; }
 
     @Override

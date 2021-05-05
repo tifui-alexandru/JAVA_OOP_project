@@ -2,7 +2,6 @@ package service;
 
 import csvParsers.CsvReader;
 import evaluationForms.Evaluation;
-import evaluationForms.Exam;
 import subject.Subject;
 
 import java.io.FileNotFoundException;
@@ -92,6 +91,10 @@ public class SubjectsService {
                 else
                     evalName = "Proiect clasic";
             }
+            csvData.add(evalName);
+            csvData.add(String.valueOf(eval.getDate()));
+            csvData.add(String.valueOf(eval.getPercentage()));
+            Main.writer.writeData("csv/evaluations.csv", csvData);
         }
 
         System.out.println("\nMaterie adaugata cu succes\n");

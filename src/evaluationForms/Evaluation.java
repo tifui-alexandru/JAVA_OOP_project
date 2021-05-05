@@ -26,6 +26,8 @@ public class Evaluation {
     public String getName() {
         return "evaluare";
     }
+    
+    public Date getDate() { return date; }
 
     public int getPercentage() {
         return percentage;
@@ -37,5 +39,9 @@ public class Evaluation {
 
         System.out.println("Procentajul din nota finala:");
         System.out.println(percentage);
+    }
+
+    public boolean isOnComputer() {
+        return false;
     }
 }

@@ -86,7 +86,7 @@ public class StudentsService {
         }
     }
 
-    public void markExam(Subject subj) {
+    public void markExam(Subject subj) throws IOException {
         for (var stud : studentsList) {
             if (stud.getYearOfStudy() == subj.getYearOfStudy()) {
                 float total = 0;
@@ -115,6 +115,14 @@ public class StudentsService {
 
                 total = totalExamen * perExamen + totalProiect * perProiect;
                 stud.setGrade(subj, total);
+
+                List<String> csvData = new ArrayList<>();
+                csvData.add(String.valueOf(stud.getId()));
+                csvData.add(String.valueOf(subj.getId()));
+                csvData.add(String.valueOf(total));
+                Main.writer.writeData("csv/catalog.csv", csvData);
+
+                System.out.println("\nNota acoradta cu succes!\n");
             }
         }
     }
