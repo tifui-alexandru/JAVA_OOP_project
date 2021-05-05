@@ -6,6 +6,7 @@ import evaluationForms.Exam;
 import subject.Subject;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -70,8 +71,29 @@ public class SubjectsService {
         return null;
     }
 
-    public void addSubject(String name, int yearOfStudy, List<Evaluation> evalForms) {
+    public void addSubject(String name, int yearOfStudy, List<Evaluation> evalForms) throws IOException {
         subjectsList.add(new Subject(name, yearOfStudy, evalForms));
+
+        List<String> csvData = new ArrayList<>();
+        String subjId = String.valueOf(subjectsList.get(subjectsList.size() - 1).getId());
+        csvData.add(subjId);
+        csvData.add(name);
+        csvData.add(String.valueOf(yearOfStudy));
+        Main.writer.writeData("csv/subjects.csv", csvData);
+
+        for (var eval : evalForms) {
+            csvData = new ArrayList<>();
+            csvData.add(String.valueOf(eval.getId()));
+            csvData.add(subjId);
+            String evalName = eval.getName();
+            if (evalName.equals("Proiect")) {
+                if (eval.isOnComputer())
+                    evalName = "Proiect pe calculator";
+                else
+                    evalName = "Proiect clasic";
+            }
+        }
+
         System.out.println("\nMaterie adaugata cu succes\n");
     }
 
@@ -93,6 +115,15 @@ public class SubjectsService {
     public static Subject findById(UUID id) {
         for (var subj : subjectsList) {
             if (subj.getId() == id) {
+                return subj;
+            }
+        }
+        return null; // not ok
+    }
+
+    public static Subject findByName(String subjTitle) {
+        for (var subj : subjectsList) {
+            if (subj.getName() == subjTitle) {
                 return subj;
             }
         }

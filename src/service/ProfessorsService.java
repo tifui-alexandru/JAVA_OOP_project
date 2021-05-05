@@ -4,6 +4,7 @@ import csvParsers.CsvReader;
 import persons.Professor;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -35,8 +36,25 @@ public class ProfessorsService {
             System.out.println("Nu exista niciun profesor cu acest nume");
     }
 
-    public void addProf(String name, Date bDay, List<String> subjects, String title) {
+    public void addProf(String name, Date bDay, List<String> subjects, String title) throws IOException {
         professorsList.add(new Professor(name, bDay, subjects, title));
+
+        List<String> csvData = new ArrayList<>();
+        String profId = String.valueOf(professorsList.get(professorsList.size() - 1).getId());
+        csvData.add(profId);
+        csvData.add(name);
+        csvData.add(String.valueOf(bDay));
+        csvData.add(title);
+        Main.writer.writeData("csv/professors.csv", csvData);
+
+        for (var subjTitle : subjects) {
+            var subj = SubjectsService.findByName(subjTitle);
+            csvData = new ArrayList<>();
+            csvData.add(String.valueOf(subj.getId()));
+            csvData.add(profId);
+            Main.writer.writeData("csv/teaching-profs.csv", csvData);
+        }
+
         System.out.println("\nProfesor adaugat cu succes\n");
     }
 

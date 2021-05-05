@@ -5,6 +5,7 @@ import persons.Student;
 import subject.Subject;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -55,8 +56,17 @@ public class StudentsService {
             System.out.println("Nu exista niciun stuent cu acest nume");
     }
 
-    public void addStudent(String name, Date bDay, int yearOfStudy, String groupName) {
+    public void addStudent(String name, Date bDay, int yearOfStudy, String groupName) throws IOException {
         studentsList.add(new Student(name, bDay, yearOfStudy, groupName));
+
+        List<String> csvData = new ArrayList<>();
+        csvData.add(String.valueOf(studentsList.get(studentsList.size() - 1).getId()));
+        csvData.add(name);
+        csvData.add(String.valueOf(bDay));
+        csvData.add(String.valueOf(yearOfStudy));
+        csvData.add(groupName);
+        Main.writer.writeData("csv/students.csv", csvData);
+
         System.out.println("\nStudent adaugat cu succes\n");
     }
 

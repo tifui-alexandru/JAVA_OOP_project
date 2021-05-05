@@ -2,6 +2,7 @@ package logger;
 
 import service.Main;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,7 @@ public class CsvLogger {
         return stingleInstance;
     }
 
-    public void logInfo(String action) {
+    public void logInfo(String action) throws IOException {
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
         List<String> data = new ArrayList<>();

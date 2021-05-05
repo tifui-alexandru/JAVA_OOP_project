@@ -3,9 +3,11 @@ package service;
 import csvParsers.CsvReader;
 import csvParsers.CsvWriter;
 import evaluationForms.Evaluation;
+import logger.CsvLogger;
 import subject.Subject;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.Scanner;
 public class Main {
     public static CsvReader reader = CsvReader.getInstance();
     public static CsvWriter writer = CsvWriter.getInstance();
+    public static CsvLogger logger = CsvLogger.getInstance();
 
     public static Scanner sc = new Scanner(System.in);
     static Service service = new Service();
@@ -182,7 +185,7 @@ public class Main {
         }
     }
 
-    public static void addStudentMenu() {
+    public static void addStudentMenu() throws IOException {
         System.out.println("\nVa rog introduceti urmatoarele date despre student:\n");
 
         System.out.println("Numele si prenumele in aceasta ordine");
@@ -230,7 +233,7 @@ public class Main {
         studentsService.addStudent(name, bDay, yearOfStudy, groupName);
     }
 
-    public static void addProfMenu() {
+    public static void addProfMenu() throws IOException {
         System.out.println("\nVa rog introduceti urmatoarele date despre profesor:\n");
 
         System.out.println("Numele si prenumele in aceasta ordine");
@@ -282,7 +285,7 @@ public class Main {
         professorsService.addProf(name, bDay, subjects, title);
     }
 
-    public static void addAssistentMenu() {
+    public static void addAssistentMenu() throws IOException {
         System.out.println("\nVa rog introduceti urmatoarele date despre asistent:\n");
 
         System.out.println("Numele si prenumele in aceasta ordine");
@@ -484,37 +487,46 @@ public class Main {
         studentsService.showRankings(yearOfStudy);
     }
 
-    public static boolean performActionMenu(int res) {
+    public static boolean performActionMenu(int res) throws IOException {
         if (res == 0) {
             System.out.println("Va multumim! O zi buna!");
             return true;
         }
         else if (res == 1) {
             studentsInfoMenu();
+            logger.logInfo("Afisare informatii despre studenti");
         }
         else if (res == 2) {
             profsInfoMenu();
+            logger.logInfo("Afisare informatii despre profesori si asistenti");
         }
         else if (res == 3) {
             subjectsInfoMenu();
+            logger.logInfo("Afisare informatii despre materii");
         }
         else if (res == 4) {
             addStudentMenu();
+            logger.logInfo("Adaugare student");
         }
         else if (res == 5) {
             addProfMenu();
+            logger.logInfo("Adaugare profesor");
         }
         else if (res == 6) {
             addAssistentMenu();
+            logger.logInfo("Adaugare asistent");
         }
         else if (res == 7) {
             addSubjectMenu();
+            logger.logInfo("Adaugare materie");
         }
         else if (res == 8) {
             markExamMenu();
+            logger.logInfo("Notare examen/proiect");
         }
         else if (res == 9) {
             showRankingsMenu();
+            logger.logInfo("Afisare clasement studenti");
         }
         return false;
     }
@@ -543,7 +555,13 @@ public class Main {
         while (true) {
             System.out.println("Va rog alegeti indicele uneia dintre urmatoarele actiuni posibile:");
             int res = displayMenu();
-            boolean stop = performActionMenu(res);
+            boolean stop = false;
+            try {
+                stop = performActionMenu(res);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Eroare in gasirea fisierului logger");
+            }
             if (stop)
                 break;
         }

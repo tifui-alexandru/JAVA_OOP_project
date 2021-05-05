@@ -22,6 +22,8 @@ public class Project extends Evaluation {
         return "proiect";
     }
 
+    public boolean isOnComputer() { return onComputer; }
+
     @Override
     public void displayDetails() {
         System.out.println("Proiect");

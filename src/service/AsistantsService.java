@@ -5,6 +5,7 @@ import persons.Assistant;
 import persons.Professor;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -36,8 +37,28 @@ public class AsistantsService {
             System.out.println("Nu exista niciun asistent cu acest nume");
     }
 
-    public void addAssistent(String name, Date bDay, List<String> subjects, boolean masterStudent) {
+    public void addAssistent(String name, Date bDay, List<String> subjects, boolean masterStudent) throws IOException {
         assistantsList.add(new Assistant(name, bDay, subjects, masterStudent));
+
+        List<String> csvData = new ArrayList<>();
+        String profId = String.valueOf(assistantsList.get(assistantsList.size() - 1).getId());
+        csvData.add(profId);
+        csvData.add(name);
+        csvData.add(String.valueOf(bDay));
+        String masterand = "normal";
+        if (masterStudent)
+            masterand = "masterand";
+        csvData.add(masterand);
+        Main.writer.writeData("csv/assistants.csv", csvData);
+
+        for (var subjTitle : subjects) {
+            var subj = SubjectsService.findByName(subjTitle);
+            csvData = new ArrayList<>();
+            csvData.add(String.valueOf(subj.getId()));
+            csvData.add(profId);
+            Main.writer.writeData("csv/teaching-asist.csv", csvData);
+        }
+
         System.out.println("\nAsistent adaugat cu succes\n");
     }
 
