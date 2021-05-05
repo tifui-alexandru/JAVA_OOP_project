@@ -62,7 +62,7 @@ public class StudentsService {
         List<String> csvData = new ArrayList<>();
         csvData.add(String.valueOf(studentsList.get(studentsList.size() - 1).getId()));
         csvData.add(name);
-        csvData.add(String.valueOf(bDay));
+        csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(bDay));
         csvData.add(String.valueOf(yearOfStudy));
         csvData.add(groupName);
         Main.writer.writeData("csv/students.csv", csvData);
@@ -89,7 +89,7 @@ public class StudentsService {
     public void markExam(Subject subj) throws IOException {
         for (var stud : studentsList) {
             if (stud.getYearOfStudy() == subj.getYearOfStudy()) {
-                float total = 0;
+                int total = 0;
 
                 float totalProiect = 0;
                 float totalExamen = 0;
@@ -113,7 +113,7 @@ public class StudentsService {
                     }
                 }
 
-                total = totalExamen * perExamen + totalProiect * perProiect;
+                total = Math.round((totalExamen * perExamen + totalProiect * perProiect) / 100);
                 stud.setGrade(subj, total);
 
                 List<String> csvData = new ArrayList<>();
@@ -155,7 +155,7 @@ public class StudentsService {
 
     public static Student findById(UUID id) {
         for (var stud : studentsList) {
-            if (stud.getId() == id)
+            if (stud.getId().equals(id))
                 return stud;
         }
         return null; // not ok
@@ -170,7 +170,17 @@ public class StudentsService {
             int yearOfStudy = Integer.parseInt(stud.get(3));
             String groupName = stud.get(4);
 
-            studentsList.add(new Student(name, bDay, yearOfStudy, groupName));
+            studentsList.add(new Student(name, bDay, yearOfStudy, groupName, id));
+
+            if (yearOfStudy == 1) {
+                year1.addGroup(groupName);
+            }
+            else if (yearOfStudy == 2) {
+                year2.addGroup(groupName);
+            }
+            else {
+                year3.addGroup(groupName);
+            }
         }
     }
 }

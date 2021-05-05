@@ -27,7 +27,7 @@ public class AsistantsService {
         boolean flag = true;
 
         for (var prof : assistantsList) {
-            if (prof.getName() == name) {
+            if (prof.getName().equals(name)) {
                 prof.displayDetails();
                 flag = false;
             }
@@ -44,7 +44,7 @@ public class AsistantsService {
         String profId = String.valueOf(assistantsList.get(assistantsList.size() - 1).getId());
         csvData.add(profId);
         csvData.add(name);
-        csvData.add(String.valueOf(bDay));
+        csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(bDay));
         String masterand = "normal";
         if (masterStudent)
             masterand = "masterand";
@@ -77,7 +77,7 @@ public class AsistantsService {
             var subjectIds = Service.getTaughtSubjectsIDS(id, "csv/teaching-asist.csv", reader);
             var subjects = SubjectsService.getSubjectsById(subjectIds);
 
-            assistantsList.add(new Assistant(name, bDay, subjects, masterStudent));
+            assistantsList.add(new Assistant(name, bDay, subjects, masterStudent, id));
         }
     }
 }

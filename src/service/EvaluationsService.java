@@ -19,7 +19,7 @@ public class EvaluationsService {
             UUID id = UUID.fromString(eval.get(0));
             UUID subjId = UUID.fromString(eval.get(1));
             String type = eval.get(2);
-            Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(eval.get(3));
+            Date date = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH).parse(eval.get(3));
             int percentage = Integer.parseInt(eval.get(4));
 
             if (evaluationsMap.get(subjId) == null)

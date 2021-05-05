@@ -20,7 +20,7 @@ public class CsvWriter {
 
         FileWriter csvWriter = new FileWriter(path);
 
-        for (var row : newData) {
+        for (var row : currData) {
             csvWriter.append(String.join(", ", row));
             csvWriter.append("\n");
         }

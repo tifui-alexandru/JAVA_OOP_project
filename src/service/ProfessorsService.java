@@ -43,7 +43,7 @@ public class ProfessorsService {
         String profId = String.valueOf(professorsList.get(professorsList.size() - 1).getId());
         csvData.add(profId);
         csvData.add(name);
-        csvData.add(String.valueOf(bDay));
+        csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(bDay));
         csvData.add(title);
         Main.writer.writeData("csv/professors.csv", csvData);
 
@@ -69,7 +69,7 @@ public class ProfessorsService {
             var subjectIds = Service.getTaughtSubjectsIDS(id, "csv/teaching-profs.csv", reader);
             var subjects = SubjectsService.getSubjectsById(subjectIds);
 
-            professorsList.add(new Professor(name, bDay, subjects, title));
+            professorsList.add(new Professor(name, bDay, subjects, title, id));
         }
     }
 }

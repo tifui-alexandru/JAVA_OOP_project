@@ -21,10 +21,10 @@ public class  Exam extends Evaluation {
 
     public String getName() {
         if(isRestanta)
-            return "restanta";
+            return "Restanta";
         if (isMarire)
-            return "marire";
-        return "examen";
+            return "Marire";
+        return "Examen";
     }
 
     public boolean isMarire() {

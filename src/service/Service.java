@@ -57,7 +57,7 @@ public class Service {
         var dbSubjects = reader.readData(path);
         List<UUID> retVal = new ArrayList<>();
         for (var subj : dbSubjects) {
-            if (UUID.fromString(subj.get(1)) == profId)
+            if (UUID.fromString(subj.get(1)).equals(profId))
                 retVal.add(UUID.fromString(subj.get(0)));
         }
         return retVal;

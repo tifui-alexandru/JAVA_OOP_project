@@ -19,7 +19,7 @@ public class Project extends Evaluation {
     }
 
     public String getName() {
-        return "proiect";
+        return "Proiect";
     }
 
     @Override

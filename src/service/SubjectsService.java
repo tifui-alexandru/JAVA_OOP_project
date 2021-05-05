@@ -6,9 +6,14 @@ import subject.Subject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static service.Service.year1;
+import static service.Service.year2;
+import static service.Service.year3;
 
 public class SubjectsService {
     public static List<Subject> subjectsList = new ArrayList<>();
@@ -92,7 +97,7 @@ public class SubjectsService {
                     evalName = "Proiect clasic";
             }
             csvData.add(evalName);
-            csvData.add(String.valueOf(eval.getDate()));
+            csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(eval.getDate()));
             csvData.add(String.valueOf(eval.getPercentage()));
             Main.writer.writeData("csv/evaluations.csv", csvData);
         }
@@ -105,7 +110,7 @@ public class SubjectsService {
 
         for (var givenId : subjIds) {
             for (var subj : subjectsList) {
-                if (subj.getId() == givenId) {
+                if (subj.getId().equals(givenId)) {
                     retVal.add(subj.getName());
                     break;
                 }
@@ -117,7 +122,7 @@ public class SubjectsService {
 
     public static Subject findById(UUID id) {
         for (var subj : subjectsList) {
-            if (subj.getId() == id) {
+            if (subj.getId().equals(id)) {
                 return subj;
             }
         }
@@ -126,7 +131,7 @@ public class SubjectsService {
 
     public static Subject findByName(String subjTitle) {
         for (var subj : subjectsList) {
-            if (subj.getName() == subjTitle) {
+            if (subj.getName().equals(subjTitle)) {
                 return subj;
             }
         }
@@ -142,6 +147,16 @@ public class SubjectsService {
             List <Evaluation> evalForms = EvaluationsService.getEvalForms(id);
 
             subjectsList.add(new Subject(name, yearOfStudy, evalForms, id));
+
+            if (yearOfStudy == 1) {
+                year1.addSubject(name);
+            }
+            else if (yearOfStudy == 2) {
+                year2.addSubject(name);
+            }
+            else {
+                year3.addSubject(name);
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ public class Evaluation {
     public UUID getId() { return id; }
 
     public String getName() {
-        return "evaluare";
+        return "Evaluare";
     }
     
     public Date getDate() { return date; }

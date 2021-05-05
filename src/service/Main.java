@@ -431,8 +431,7 @@ public class Main {
             }
 
             boolean onComputer;
-            System.out.println("Daca forma de evaluare este proiect selectati 1 daca aceasta consta in");
-            System.out.println("realizarea unui proiect si 0 in caz contrat");
+            System.out.println("Daca forma de evaluare este proiect selectati 1 daca aceasta se va desfasura pe calculator si 0 in caz contrar");
             System.out.println("Daca proba nu este realizarea unui proiect apasati orice tasta");
             String response = sc.nextLine();
             if (service.validResponse(response, 0, 1)) {
