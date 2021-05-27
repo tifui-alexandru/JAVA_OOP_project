@@ -37,7 +37,7 @@ public class ProfessorsService {
             System.out.println("Nu exista niciun profesor cu acest nume");
     }
 
-    public void addProf(String name, Date bDay, List<String> subjects, String title) throws IOException {
+    public void addProf(String name, Date bDay, List<String> subjects, String title) {
         professorsList.add(new Professor(name, bDay, subjects, title));
 
         List<String> csvData = new ArrayList<>();
@@ -47,14 +47,14 @@ public class ProfessorsService {
         csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(bDay));
         csvData.add(title);
 
-        DbConnection.insert('professors', csvData);
+        DbConnection.insert("professors", csvData);
 
         for (var subjTitle : subjects) {
             var subj = SubjectsService.findByName(subjTitle);
             csvData = new ArrayList<>();
             csvData.add(String.valueOf(subj.getId()));
             csvData.add(profId);
-            DbConnection.insert('teaching-profs', csvData);
+            DbConnection.insert("teaching-profs", csvData);
         }
 
         System.out.println("\nProfesor adaugat cu succes\n");

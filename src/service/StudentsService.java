@@ -66,7 +66,7 @@ public class StudentsService {
         csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(bDay));
         csvData.add(String.valueOf(yearOfStudy));
         csvData.add(groupName);
-        Main.writer.writeData("csv/students.csv", csvData);
+        DbConnection.insert("students", csvData);
 
         System.out.println("\nStudent adaugat cu succes\n");
     }
@@ -87,7 +87,7 @@ public class StudentsService {
         }
     }
 
-    public void markExam(Subject subj) throws IOException {
+    public void markExam(Subject subj) {
         for (var stud : studentsList) {
             if (stud.getYearOfStudy() == subj.getYearOfStudy()) {
                 int total = 0;
@@ -121,7 +121,7 @@ public class StudentsService {
                 csvData.add(String.valueOf(stud.getId()));
                 csvData.add(String.valueOf(subj.getId()));
                 csvData.add(String.valueOf(total));
-                Main.writer.writeData("csv/catalog.csv", csvData);
+                DbConnection.insert("catalog", csvData);
 
                 System.out.println("\nNota acoradta cu succes!\n");
             }

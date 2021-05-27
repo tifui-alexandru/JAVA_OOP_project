@@ -76,7 +76,7 @@ public class SubjectsService {
         return null;
     }
 
-    public void addSubject(String name, int yearOfStudy, List<Evaluation> evalForms) throws IOException {
+    public void addSubject(String name, int yearOfStudy, List<Evaluation> evalForms) {
         subjectsList.add(new Subject(name, yearOfStudy, evalForms));
 
         List<String> csvData = new ArrayList<>();
@@ -84,7 +84,7 @@ public class SubjectsService {
         csvData.add(subjId);
         csvData.add(name);
         csvData.add(String.valueOf(yearOfStudy));
-        Main.writer.writeData("csv/subjects.csv", csvData);
+        DbConnection.insert("subjects", csvData);
 
         for (var eval : evalForms) {
             csvData = new ArrayList<>();
@@ -100,7 +100,7 @@ public class SubjectsService {
             csvData.add(evalName);
             csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(eval.getDate()));
             csvData.add(String.valueOf(eval.getPercentage()));
-            Main.writer.writeData("csv/evaluations.csv", csvData);
+            DbConnection.insert("evaluations", csvData);
         }
 
         System.out.println("\nMaterie adaugata cu succes\n");

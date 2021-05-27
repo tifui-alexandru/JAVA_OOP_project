@@ -37,7 +37,7 @@ public class AsistantsService {
             System.out.println("Nu exista niciun asistent cu acest nume");
     }
 
-    public void addAssistent(String name, Date bDay, List<String> subjects, boolean masterStudent) throws IOException {
+    public void addAssistent(String name, Date bDay, List<String> subjects, boolean masterStudent) {
         assistantsList.add(new Assistant(name, bDay, subjects, masterStudent));
 
         List<String> csvData = new ArrayList<>();

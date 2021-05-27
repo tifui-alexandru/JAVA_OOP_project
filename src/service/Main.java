@@ -1,11 +1,15 @@
 package service;
 
+import csvParsers.CsvReader;
+import csvParsers.CsvWriter;
+import db.DbConnection;
 import evaluationForms.Evaluation;
 import logger.CsvLogger;
 import subject.Subject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +19,11 @@ import java.util.Scanner;
 
 public class Main {
     public static CsvLogger logger = CsvLogger.getInstance();
+
+    public static CsvReader reader = CsvReader.getInstance();
+    public static CsvWriter writer = CsvWriter.getInstance();
+
+    public static DbConnection DbInstance = DbConnection.getInstance();
 
     public static Scanner sc = new Scanner(System.in);
     static Service service = new Service();

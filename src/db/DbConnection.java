@@ -7,9 +7,10 @@ import java.util.List;
 
 public class DbConnection {
     private static Connection con = null;
+    private static DbConnection stingleInstance = null;
 
-    static {
-        String url = "jdbc:mysql:// localhost:3306/alex";
+    DbConnection() {
+        String url = "jdbc:mysql://localhost:3306/alex";
         String user = "alex";
         String pass = "alex";
         try {
@@ -21,8 +22,10 @@ public class DbConnection {
         }
     }
 
-    private static Connection getConnection() {
-        return con;
+    public static DbConnection getInstance() {
+        if (stingleInstance == null)
+            stingleInstance = new DbConnection();
+        return stingleInstance;
     }
 
     public static void insert(String tableName, List<String> dataList) {
@@ -42,7 +45,7 @@ public class DbConnection {
     public static List<List<String>> readAll(String tableName) {
         try {
             String query = String.format("select data from %s", tableName);
-            var res = con.prepareStatement(query).executeQuery();
+            ResultSet res = con.prepareStatement(query).executeQuery();
 
             List<List<String>> retVal = new ArrayList<>();
             while(res.next()) {
