@@ -1,6 +1,7 @@
 package service;
 
 import csvParsers.CsvReader;
+import db.DbConnection;
 import evaluationForms.Evaluation;
 import evaluationForms.Exam;
 import evaluationForms.Project;
@@ -53,8 +54,8 @@ public class Service {
         }
     }
 
-    public static List<UUID> getTaughtSubjectsIDS(UUID profId, String path, CsvReader reader) throws FileNotFoundException {
-        var dbSubjects = reader.readData(path);
+    public static List<UUID> getTaughtSubjectsIDS(UUID profId, String tableName) {
+        var dbSubjects = DbConnection.readAll(tableName);
         List<UUID> retVal = new ArrayList<>();
         for (var subj : dbSubjects) {
             if (UUID.fromString(subj.get(1)).equals(profId))

@@ -1,12 +1,15 @@
 package db;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DbConnection {
     private static Connection con = null;
 
     static {
-        String url = "jdbc:mysql:// localhost:3306/org";
+        String url = "jdbc:mysql:// localhost:3306/alex";
         String user = "alex";
         String pass = "alex";
         try {
@@ -22,12 +25,13 @@ public class DbConnection {
         return con;
     }
 
-    public static void insertData(String tableName, String data) {
+    public static void insert(String tableName, List<String> dataList) {
         Statement statement = null;
+        String data = String.join(", ", dataList);
 
         try {
             statement = con.createStatement();
-            String query = "insert into {tableNmae} values ({data})";
+            String query = String.format("insert into %s values (%s)", tableName, data);
             statement.executeUpdate(query);
         }
         catch (SQLException throwables) {
@@ -35,23 +39,51 @@ public class DbConnection {
         }
     }
 
-    public static String readData(String tableName) {
+    public static List<List<String>> readAll(String tableName) {
         try {
-            String query = "select data from {tableNmae}";
-            return con.prepareStatement(query).executeQuery().getString(0);
+            String query = String.format("select data from %s", tableName);
+            var res = con.prepareStatement(query).executeQuery();
+
+            List<List<String>> retVal = new ArrayList<>();
+            while(res.next()) {
+                String line = res.getString("data");
+                List <String> listLine = Arrays.asList(line.split(", "));
+                retVal.add(listLine);
+            }
+
+            return retVal;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return "none";
+        return new ArrayList<>();
     }
 
-    public static void updateData(String tableName, String oldData, String newData) {
+    public static List<String> readOne(String tableName, String id) {
+        try {
+            String query = String.format("select data from %s", tableName);
+            var res = con.prepareStatement(query).executeQuery();
+
+            while(res.next()) {
+                String line = res.getString("data");
+                List <String> listLine = Arrays.asList(line.split(", "));
+                if (listLine.get(0).equals(id))
+                    return listLine;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return new ArrayList<>();
+    }
+
+    public static void update(String tableName, String id, List<String> newData) {
         Statement statement = null;
+        String oldData = String.join(", ", readOne(tableName, id));
 
         try {
             statement = con.createStatement();
-            String query = "alter table {tableNmae} set data = {newData} where data = {oldData}";
+            String query = String.format("alter table %s set data = %s where data = %s", tableName, oldData, newData);
             statement.executeUpdate(query);
         }
         catch (SQLException throwables) {
@@ -59,12 +91,13 @@ public class DbConnection {
         }
     }
 
-    public static void detedeData(String tableName, String data) {
+    public static void detede(String tableName, String id) {
         Statement statement = null;
+        String data = String.join(", ", readOne(tableName, id));
 
         try {
             statement = con.createStatement();
-            String query = "delete from {tableNmae} where data = {data}";
+            String query = String.format("delete from %s where data = %s", tableName, data);
             statement.executeUpdate(query);
         }
         catch (SQLException throwables) {

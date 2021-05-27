@@ -1,6 +1,7 @@
 package service;
 
 import csvParsers.CsvReader;
+import db.DbConnection;
 import evaluationForms.Evaluation;
 import subject.Subject;
 
@@ -138,8 +139,8 @@ public class SubjectsService {
         return null; // not ok
     }
 
-    public void initSubjects(CsvReader reader) throws FileNotFoundException {
-        var dbSubjectsList = reader.readData("csv/subjects.csv");
+    public void initSubjects() {
+        var dbSubjectsList = DbConnection.readAll("subjects");
         for (var subj : dbSubjectsList) {
             UUID id = UUID.fromString(subj.get(0));
             String name = subj.get(1);

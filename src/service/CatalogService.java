@@ -1,6 +1,7 @@
 package service;
 
 import csvParsers.CsvReader;
+import db.DbConnection;
 import persons.Student;
 import subject.Subject;
 
@@ -11,8 +12,8 @@ import java.util.Locale;
 import java.util.UUID;
 
 public class CatalogService {
-    public void initGrades(CsvReader reader) throws FileNotFoundException, ParseException {
-        var dbStudentsList = reader.readData("csv/catalog.csv");
+    public void initGrades() throws ParseException {
+        var dbStudentsList = DbConnection.readAll("catalog");
         for (var studListObj : dbStudentsList) {
             UUID idStudent = UUID.fromString(studListObj.get(0));
             UUID idSubject = UUID.fromString(studListObj.get(1));

@@ -1,6 +1,7 @@
 package service;
 
 import csvParsers.CsvReader;
+import db.DbConnection;
 import persons.Professor;
 
 import java.io.FileNotFoundException;
@@ -45,28 +46,29 @@ public class ProfessorsService {
         csvData.add(name);
         csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(bDay));
         csvData.add(title);
-        Main.writer.writeData("csv/professors.csv", csvData);
+
+        DbConnection.insert('professors', csvData);
 
         for (var subjTitle : subjects) {
             var subj = SubjectsService.findByName(subjTitle);
             csvData = new ArrayList<>();
             csvData.add(String.valueOf(subj.getId()));
             csvData.add(profId);
-            Main.writer.writeData("csv/teaching-profs.csv", csvData);
+            DbConnection.insert('teaching-profs', csvData);
         }
 
         System.out.println("\nProfesor adaugat cu succes\n");
     }
 
-    public void initProfessors(CsvReader reader) throws FileNotFoundException, ParseException {
-        var dbProfessordList = reader.readData("csv/professors.csv");
+    public void initProfessors() throws ParseException {
+        var dbProfessordList = DbConnection.readAll("professors");
         for (var prof : dbProfessordList) {
             UUID id = UUID.fromString(prof.get(0));
             String name = prof.get(1);
             Date bDay = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(prof.get(2));
             String title = prof.get(3);
 
-            var subjectIds = Service.getTaughtSubjectsIDS(id, "csv/teaching-profs.csv", reader);
+            var subjectIds = Service.getTaughtSubjectsIDS(id, "teaching-profs");
             var subjects = SubjectsService.getSubjectsById(subjectIds);
 
             professorsList.add(new Professor(name, bDay, subjects, title, id));

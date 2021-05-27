@@ -1,6 +1,7 @@
 package service;
 
 import csvParsers.CsvReader;
+import db.DbConnection;
 import evaluationForms.Evaluation;
 import evaluationForms.Exam;
 import evaluationForms.Project;
@@ -13,8 +14,8 @@ import java.util.*;
 public class EvaluationsService {
     private static HashMap<UUID, List<Evaluation>> evaluationsMap = new HashMap<>();
 
-    public void initEvaluations(CsvReader reader) throws FileNotFoundException, ParseException {
-        var dbEvaluationsList = reader.readData("csv/evaluations.csv");
+    public void initEvaluations() throws ParseException {
+        var dbEvaluationsList = DbConnection.readAll("evaluations");
         for (var eval : dbEvaluationsList) {
             UUID id = UUID.fromString(eval.get(0));
             UUID subjId = UUID.fromString(eval.get(1));

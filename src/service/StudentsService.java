@@ -1,6 +1,7 @@
 package service;
 
 import csvParsers.CsvReader;
+import db.DbConnection;
 import persons.Student;
 import subject.Subject;
 
@@ -161,8 +162,8 @@ public class StudentsService {
         return null; // not ok
     }
 
-    public void initStudents(CsvReader reader) throws FileNotFoundException, ParseException {
-        var dbStudentsList = reader.readData("csv/students.csv");
+    public void initStudents() throws ParseException {
+        var dbStudentsList = DbConnection.readAll("students");
         for (var stud : dbStudentsList) {
             UUID id = UUID.fromString(stud.get(0));
             String name = stud.get(1);
