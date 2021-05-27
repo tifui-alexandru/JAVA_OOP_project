@@ -57,7 +57,7 @@ public class StudentsService {
             System.out.println("Nu exista niciun stuent cu acest nume");
     }
 
-    public void addStudent(String name, Date bDay, int yearOfStudy, String groupName) throws IOException {
+    public void addStudent(String name, Date bDay, int yearOfStudy, String groupName) {
         studentsList.add(new Student(name, bDay, yearOfStudy, groupName));
 
         List<String> csvData = new ArrayList<>();
@@ -69,6 +69,41 @@ public class StudentsService {
         DbConnection.insert("students", csvData);
 
         System.out.println("\nStudent adaugat cu succes\n");
+    }
+
+    public void editStudent(String name, String newName) {
+        for (var stud : studentsList) {
+            if (stud.getName().equals(name)) {
+                List<String> csvData = new ArrayList<>();
+                csvData.add(String.valueOf(stud.getId()));
+                csvData.add(newName);
+                csvData.add(new SimpleDateFormat("dd/MM/yyyy").format(stud.getBirthday()));
+                csvData.add(String.valueOf(stud.getYearOfStudy()));
+                csvData.add(stud.getGroupName());
+
+                DbConnection.update("students", String.valueOf(stud.getId()), csvData);
+                stud.setName(name);
+                System.out.println("\nStudent editat cu succes\n");
+                return;
+            }
+        }
+
+        System.out.println("\nNu exista niciun student cu acest nume\n");
+    }
+
+    public void deleteStudent(String name) {
+        int pos = 0;
+        for (var stud : studentsList) {
+            if (stud.getName().equals(name)) {
+                DbConnection.delete("students", String.valueOf(stud.getId()));
+                System.out.println("\nStudent sters cu succes\n");
+                studentsList.remove(pos);
+                return;
+            }
+            ++pos;
+        }
+
+        System.out.println("\nNu exista niciun student cu acest nume\n");
     }
 
     public void updateSubjects(int yearOfStudy) {

@@ -54,7 +54,7 @@ public class ProfessorsService {
             csvData = new ArrayList<>();
             csvData.add(String.valueOf(subj.getId()));
             csvData.add(profId);
-            DbConnection.insert("teaching-profs", csvData);
+            DbConnection.insert("teachingprofs", csvData);
         }
 
         System.out.println("\nProfesor adaugat cu succes\n");
@@ -68,7 +68,7 @@ public class ProfessorsService {
             Date bDay = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(prof.get(2));
             String title = prof.get(3);
 
-            var subjectIds = Service.getTaughtSubjectsIDS(id, "teaching-profs");
+            var subjectIds = Service.getTaughtSubjectsIDS(id, "teachingprofs");
             var subjects = SubjectsService.getSubjectsById(subjectIds);
 
             professorsList.add(new Professor(name, bDay, subjects, title, id));

@@ -41,14 +41,16 @@ public class Main {
             System.out.println("2. Afisati informatii despre profesori si asistenti");
             System.out.println("3. Afisati informatii despre materii");
             System.out.println("4. Adaugati student");
-            System.out.println("5. Adaugati profesor");
-            System.out.println("6. Adaugati asistent");
-            System.out.println("7. Adaugati materie");
-            System.out.println("8. Notati un examen/proiect");
-            System.out.println("9. Afisati clasamentul studentilor");
+            System.out.println("5. Editati student");
+            System.out.println("6. Stergeti student");
+            System.out.println("7. Adaugati profesor");
+            System.out.println("8. Adaugati asistent");
+            System.out.println("9. Adaugati materie");
+            System.out.println("10. Notati un examen/proiect");
+            System.out.println("11. Afisati clasamentul studentilor");
 
             String response = sc.nextLine();
-            if (service.validResponse(response, 0, 9))
+            if (service.validResponse(response, 0, 11))
                 return Integer.parseInt(response);
             else
                 System.out.println("\nOptinuea este invalida, va rog reincercati!\n");
@@ -236,6 +238,23 @@ public class Main {
         }
 
         studentsService.addStudent(name, bDay, yearOfStudy, groupName);
+    }
+
+    public static void editStudentMenu() {
+        System.out.println("\nVa rog introduceti numele si prenumele studentului:\n");
+        String name = sc.nextLine();
+
+        System.out.println("\nVa rog introduceti noul nume al studentului:\n");
+        String newName = sc.nextLine();
+
+        studentsService.editStudent(name, newName);
+    }
+
+    public static void deleteStudentMenu() {
+        System.out.println("\nVa rog introduceti numele si prenumele studentului:\n");
+        String name = sc.nextLine();
+
+        studentsService.deleteStudent(name);
     }
 
     public static void addProfMenu() throws IOException {
@@ -513,22 +532,30 @@ public class Main {
             logger.logInfo("Adaugare student");
         }
         else if (res == 5) {
+            editStudentMenu();
+            logger.logInfo("Editare student");
+        }
+        else if (res == 6) {
+            deleteStudentMenu();
+            logger.logInfo("Stergere student");
+        }
+        else if (res == 7) {
             addProfMenu();
             logger.logInfo("Adaugare profesor");
         }
-        else if (res == 6) {
+        else if (res == 8) {
             addAssistentMenu();
             logger.logInfo("Adaugare asistent");
         }
-        else if (res == 7) {
+        else if (res == 9) {
             addSubjectMenu();
             logger.logInfo("Adaugare materie");
         }
-        else if (res == 8) {
+        else if (res == 10) {
             markExamMenu();
             logger.logInfo("Notare examen/proiect");
         }
-        else if (res == 9) {
+        else if (res == 11) {
             showRankingsMenu();
             logger.logInfo("Afisare clasement studenti");
         }

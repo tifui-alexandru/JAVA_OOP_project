@@ -33,6 +33,9 @@ public class Person {
         return name;
     }
 
+    public void setName(String name) { this.name = name; }
+
+
     public void setSubjects(List<String> subjects) {
         this.subjects = subjects;
     }

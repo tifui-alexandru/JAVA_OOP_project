@@ -57,7 +57,7 @@ public class AsistantsService {
             csvData = new ArrayList<>();
             csvData.add(String.valueOf(subj.getId()));
             csvData.add(profId);
-            DbConnection.insert("teaching-asist", csvData);
+            DbConnection.insert("teachingasist", csvData);
         }
 
         System.out.println("\nAsistent adaugat cu succes\n");
@@ -75,7 +75,7 @@ public class AsistantsService {
             if (title.equals("masterand"))
                 masterStudent = true;
 
-            var subjectIds = Service.getTaughtSubjectsIDS(id, "teaching-asist");
+            var subjectIds = Service.getTaughtSubjectsIDS(id, "teachingasist");
             var subjects = SubjectsService.getSubjectsById(subjectIds);
 
             assistantsList.add(new Assistant(name, bDay, subjects, masterStudent, id));

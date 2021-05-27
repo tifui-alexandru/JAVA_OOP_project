@@ -33,7 +33,7 @@ public class DbConnection {
 
         try {
             statement = con.createStatement();
-            String query = String.format("insert into %s values (%s)", tableName, data);
+            String query = String.format("insert into %s values (\'%s\')", tableName, data);
             statement.executeUpdate(query);
         }
         catch (SQLException throwables) {
@@ -79,13 +79,14 @@ public class DbConnection {
         return new ArrayList<>();
     }
 
-    public static void update(String tableName, String id, List<String> newData) {
+    public static void update(String tableName, String id, List<String> newDataList) {
         Statement statement = null;
         String oldData = String.join(", ", readOne(tableName, id));
+        String newData = String.join(", ", newDataList);
 
         try {
             statement = con.createStatement();
-            String query = String.format("alter table %s set data = %s where data = %s", tableName, oldData, newData);
+            String query = String.format("update %s set data = \'%s\' where data = \'%s\'", tableName, newData, oldData);
             statement.executeUpdate(query);
         }
         catch (SQLException throwables) {
@@ -93,13 +94,13 @@ public class DbConnection {
         }
     }
 
-    public static void detede(String tableName, String id) {
+    public static void delete(String tableName, String id) {
         Statement statement = null;
         String data = String.join(", ", readOne(tableName, id));
 
         try {
             statement = con.createStatement();
-            String query = String.format("delete from %s where data = %s", tableName, data);
+            String query = String.format("delete from %s where data = \'%s\'", tableName, data);
             statement.executeUpdate(query);
         }
         catch (SQLException throwables) {
