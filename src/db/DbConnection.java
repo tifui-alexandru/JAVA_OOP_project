@@ -14,10 +14,9 @@ public class DbConnection {
         String user = "alex";
         String pass = "alex";
         try {
-            Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, user, pass);
         }
-        catch (ClassNotFoundException | SQLException e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
